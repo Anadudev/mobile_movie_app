@@ -78,5 +78,7 @@ interface TrendingCardProps {
 
 interface SearchBarProps {
   onPress?: () => void;
+  onChangeText?: (query: string) => void;
   placeholder: string;
+  value?: string;
 }
