@@ -75,3 +75,8 @@ interface TrendingCardProps {
   movie: TrendingMovie;
   index: number;
 }
+
+interface SearchBarProps {
+  onPress?: () => void;
+  placeholder: string;
+}
