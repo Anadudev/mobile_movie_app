@@ -3,7 +3,7 @@ import React from "react";
 
 const Saved = () => {
   return (
-    <View>
+    <View className="bg-primary flex-1 px-10">
       <Text>Saved</Text>
     </View>
   );

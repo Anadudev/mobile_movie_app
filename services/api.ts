@@ -32,3 +32,31 @@ export const fetchMovies = async ({ query }: { query: string }) => {
     console.log(error);
   }
 };
+
+export const fetchMovieDetails = async (
+  movieId: string
+): Promise<MovieDetails> => {
+  try {
+    // https://api.themoviedb.org/3/movie/
+    const endpoint = `${TMBD_CONFIG.BASE_URL}/movie/${movieId}?language=en-US`;
+
+    const response = await fetch(endpoint, {
+      method: "GET",
+      headers: TMBD_CONFIG.headers,
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        response.statusText || "Failed to fetch movie details",
+        // @ts-ignore
+        response.statusText
+      );
+    }
+    const data = await response.json();
+    // console.log(data);
+    return data;
+  } catch (error) {
+    console.log("[fetchMovieDetails]: ", error);
+    throw error;
+  }
+};
