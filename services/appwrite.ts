@@ -12,7 +12,7 @@ const database = new Databases(client);
 export const updateSearchCount = async (query: string, movie: Movie) => {
   try {
     const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
-      Query.equal("search term", query),
+      Query.equal("searchTerm", query),
     ]);
 
     if (result.documents[0]) {
@@ -37,7 +37,22 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
     }
   } catch (error) {
     console.error(error);
-	throw error;
+    throw error;
+  }
+};
 
+export const getTrendingMovies = async (): Promise<
+  TrendingMovie[] | undefined
+> => {
+  try {
+    const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+      Query.limit(5),
+      Query.orderDesc("count"),
+    ]);
+
+    return result.documents as unknown as TrendingMovie[];
+  } catch (error) {
+    console.error();
+    return undefined;
   }
 };
