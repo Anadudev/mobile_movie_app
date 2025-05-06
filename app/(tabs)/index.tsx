@@ -1,5 +1,6 @@
 import MovieCard from "@/components/MovieCard";
 import SearchBar from "@/components/SearchBar";
+import TrendingCard from "@/components/TrendingCard";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchMovies } from "@/services/api";
@@ -63,7 +64,10 @@ export default function Index() {
                 <FlatList
                   data={trendingMovies}
                   renderItem={({ item }: { item: TrendingMovie }) => (
-                    <Text className="text-sm text-white">{item.title}</Text>
+                    <TrendingCard
+                      movie={item}
+                      index={trendingMovies.indexOf(item)}
+                    />
                   )}
                   keyExtractor={(item) => item.movie_id.toString()}
                   horizontal
